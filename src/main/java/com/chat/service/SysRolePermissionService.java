@@ -1,7 +1,7 @@
 package com.chat.service;
 
 import com.chat.entity.SysRolePermission;
-import com.baomidou.mybatisplus.service.IService;
+import com.chat.common.ParentsService;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.service.IService;
  * </p>
  *
  * @author taotao
- * @since 2018-05-17
+ * @since 2018-05-23
  */
-public interface SysRolePermissionService extends IService<SysRolePermission> {
+public interface SysRolePermissionService extends ParentsService<SysRolePermission> {
 
 }

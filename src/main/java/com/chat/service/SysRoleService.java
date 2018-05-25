@@ -1,7 +1,9 @@
 package com.chat.service;
 
 import com.chat.entity.SysRole;
-import com.baomidou.mybatisplus.service.IService;
+import com.chat.common.ParentsService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -9,8 +11,12 @@ import com.baomidou.mybatisplus.service.IService;
  * </p>
  *
  * @author taotao
- * @since 2018-05-17
+ * @since 2018-05-23
  */
-public interface SysRoleService extends IService<SysRole> {
-
+public interface SysRoleService extends ParentsService<SysRole> {
+    /**
+     * 通过uid查询角色表
+     * @return
+     */
+    public List<SysRole> selectByUid(long id);
 }

@@ -3,7 +3,7 @@ package com.chat.service.impl;
 import com.chat.entity.SysPermission;
 import com.chat.mapper.SysPermissionMapper;
 import com.chat.service.SysPermissionService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.chat.common.ParentsServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author taotao
- * @since 2018-05-17
+ * @since 2018-05-23
  */
 @Service
-public class SysPermissionServiceImap extends ServiceImpl<SysPermissionMapper, SysPermission> implements SysPermissionService {
+public class SysPermissionServiceImap extends ParentsServiceImpl<SysPermissionMapper, SysPermission> implements SysPermissionService {
 
 }

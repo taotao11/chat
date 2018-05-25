@@ -1,9 +1,13 @@
 package com.chat.email;
 
 import com.chat.email.entity.EmailEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +17,9 @@ import javax.mail.internet.MimeMessage;
 /**
  * 发送邮件
  */
+@Component
 public class SendEmail {
+    private static Logger logger = LoggerFactory.getLogger(SendEmail.class);
     @Autowired
     private JavaMailSender javaMailSender;
     //发送邮件
@@ -31,7 +37,6 @@ public class SendEmail {
         messageHelper.setText(email.getText());
         //发送
         this.javaMailSender.send(mimeMailMessage);
-        System.out.println("success");
-
+        logger.info("邮件 {} 发送成功！！！",email.getToFrom());
     }
 }

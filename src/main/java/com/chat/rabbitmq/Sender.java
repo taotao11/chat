@@ -1,5 +1,7 @@
 package com.chat.rabbitmq;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate.ReturnCallback;
@@ -16,6 +18,7 @@ import java.util.UUID;
  */
 @Component
 public class Sender implements RabbitTemplate.ConfirmCallback,ReturnCallback {
+    private static Logger logger = LoggerFactory.getLogger(Sender.class);
     @Autowired
     private RabbitTemplate template;
 
@@ -34,9 +37,9 @@ public class Sender implements RabbitTemplate.ConfirmCallback,ReturnCallback {
     @Override
     public void confirm(CorrelationData correlationData, boolean b, String s) {
         if (b){
-            System.out.println("消息发送成功" + correlationData);
+            logger.info("消息发送成功" + correlationData);
         }else {
-            System.out.println("消息发送失败" + s);
+            logger.error("消息发送失败" + s);
         }
     }
 
@@ -50,15 +53,15 @@ public class Sender implements RabbitTemplate.ConfirmCallback,ReturnCallback {
      */
     @Override
     public void returnedMessage(Message message, int i, String s, String s1, String s2) {
-        System.out.println(message.getMessageProperties().getCorrelationIdString() + "发送失败");
+        logger.error(message.getMessageProperties().getCorrelationIdString() + "发送失败");
     }
 
     public void send(String message){
         //定义index
         CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-        System.out.println("开始发送消息: " + message.toLowerCase());
+        logger.info("开始发送消息: " + message.toLowerCase());
         String response = template.convertSendAndReceive("topicExchange","key.1",message,correlationData).toString();
-        System.out.println("结束发消息: " + message.toLowerCase());
-        System.out.println("消费者响应: " + response + " 消息处理完成");
+        logger.info("结束发消息: " + message.toLowerCase());
+        logger.info("消费者响应: " + response + " 消息处理完成");
     }
 }

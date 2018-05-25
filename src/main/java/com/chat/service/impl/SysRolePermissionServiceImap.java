@@ -3,7 +3,7 @@ package com.chat.service.impl;
 import com.chat.entity.SysRolePermission;
 import com.chat.mapper.SysRolePermissionMapper;
 import com.chat.service.SysRolePermissionService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.chat.common.ParentsServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author taotao
- * @since 2018-05-17
+ * @since 2018-05-23
  */
 @Service
-public class SysRolePermissionServiceImap extends ServiceImpl<SysRolePermissionMapper, SysRolePermission> implements SysRolePermissionService {
+public class SysRolePermissionServiceImap extends ParentsServiceImpl<SysRolePermissionMapper, SysRolePermission> implements SysRolePermissionService {
 
 }

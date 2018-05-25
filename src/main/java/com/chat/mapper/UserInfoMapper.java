@@ -1,8 +1,7 @@
 package com.chat.mapper;
 
-import com.chat.common.ParentMapper;
+import com.chat.common.ParentsMapper;
 import com.chat.entity.UserInfo;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
  * <p>
@@ -12,6 +11,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @author taotao
  * @since 2018-05-17
  */
-public interface UserInfoMapper extends ParentMapper<UserInfo> {
+public interface UserInfoMapper extends ParentsMapper<UserInfo> {
 
 }

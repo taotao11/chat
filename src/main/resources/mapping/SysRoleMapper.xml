@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chat.mapping.SysRoleMapper">
+<mapper namespace="com.chat.mapper.SysRoleMapper">
 
     <!-- 开启二级缓存 -->
     <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
@@ -20,5 +20,17 @@
     <sql id="Base_Column_List">
         id, remark, title, role, creat_time AS creatTime, update_time AS updateTime, is_delete AS isDelete
     </sql>
-
+    <!--查询角色信息-->
+    <select id="selectByUid" resultMap="BaseResultMap">
+    SELECT
+      r.*
+    FROM
+     sys_role r
+    left JOIN
+     sys_user_role ru
+    on
+     r.id = ru.role_id
+    WHERE
+    ru.uid = #{id}
+    </select>
 </mapper>

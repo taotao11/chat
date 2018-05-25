@@ -3,7 +3,7 @@ package com.chat.service.impl;
 import com.chat.entity.SysUserRole;
 import com.chat.mapper.SysUserRoleMapper;
 import com.chat.service.SysUserRoleService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.chat.common.ParentsServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author taotao
- * @since 2018-05-17
+ * @since 2018-05-23
  */
 @Service
-public class SysUserRoleServiceImap extends ServiceImpl<SysUserRoleMapper, SysUserRole> implements SysUserRoleService {
+public class SysUserRoleServiceImap extends ParentsServiceImpl<SysUserRoleMapper, SysUserRole> implements SysUserRoleService {
 
 }

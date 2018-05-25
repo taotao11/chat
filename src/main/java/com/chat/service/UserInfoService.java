@@ -13,5 +13,12 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-05-17
  */
 public interface UserInfoService extends ParentsService<UserInfo> {
+    /**
+     * 添加用户
+     * @param userInfo
+     * @return
+     * @throws Exception
+     */
+    public boolean addUserInfo(UserInfo userInfo) throws Exception;
 
 }

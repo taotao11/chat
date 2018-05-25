@@ -29,7 +29,7 @@ public class CodeMain {
         gc.setMapperName("%sMapper");
         gc.setXmlName("%sMapper");
         gc.setServiceName("%sService");
-        gc.setServiceImplName("%sServiceImap");
+        gc.setServiceImplName("%sServiceImpl");
         gc.setControllerName("%sController");
         mpg.setGlobalConfig(gc);
 

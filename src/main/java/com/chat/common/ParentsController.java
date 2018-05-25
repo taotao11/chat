@@ -13,7 +13,10 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.apache.commons.lang3.StringUtils;
@@ -22,10 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 抽象父类--简单的增删查改
@@ -59,10 +59,11 @@ public class ParentsController<BaseServiceImpl extends ParentsService,T,PK exten
     public T add(@RequestBody T t){
         //设置通用字段
         setValue(t,"creatTime",new Date());
+        setValue(t,Constant.IS_DELETE,Constant.IS_DELETE_FALSE);
+        setValue(t,Constant.TYPE,Constant.TYPE_XX);
         boolean insert = baseServiceImpl.insert(t);
         return t;
     }
-
     /**
      * 修改
      * @param t
@@ -84,12 +85,25 @@ public class ParentsController<BaseServiceImpl extends ParentsService,T,PK exten
         }
         return result;
     }
-    public String deleteById(long id){
+
+    /**
+     * 单个删除
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "单个删除")
+    @Delete("/deleteById")
+    @Transactional
+    public ResponseEntity<Map<String,String>> deleteById(long id){
+        Map<String,String> map = new HashMap<>();
+
         boolean delete = baseServiceImpl.deleteById(id);
         if (delete){
-            return "";
+            map.put("message","删除成功!!!");
+            return new ResponseEntity<Map<String,String>>(map,HttpStatus.OK);
         }else {
-            return "";
+            map.put("message","删除失败!!!");
+            return new ResponseEntity<Map<String,String>>(map,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     /**
@@ -97,7 +111,7 @@ public class ParentsController<BaseServiceImpl extends ParentsService,T,PK exten
      * @return
      */
     @ApiOperation(value = "批量删除")
-    @DeleteMapping("delete")
+    @DeleteMapping("/deleteByList")
     @Transactional
     public String deleteAllById(@RequestBody List<PK> ids){
         List<T> tList = new ArrayList<T>();
@@ -117,7 +131,7 @@ public class ParentsController<BaseServiceImpl extends ParentsService,T,PK exten
     }
 
     /**
-     * 使用@JsonView(View.User.class) 后 封装不能太多
+     * 使用@JsonView(View.User.class) 后 封装层级不能太多
      *
      *
      * 查询所有
@@ -147,16 +161,6 @@ public class ParentsController<BaseServiceImpl extends ParentsService,T,PK exten
 
         return wrapper;
     }
-    @GetMapping("/get")
-    public String selectByReq(){
-        //获得所有参数与值
-        Map<String,String[]> map = request.getParameterMap();
-        map.get("").toString();
-        System.out.println(map);
-        return "success";
-    }
-
-
     //设置  删除过滤条件
     public void setWrapper(EntityWrapper wrapper){
         //查询没有被删除的
@@ -185,4 +189,5 @@ public class ParentsController<BaseServiceImpl extends ParentsService,T,PK exten
 
         return entity;
     }
+
 }

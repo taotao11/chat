@@ -1,7 +1,10 @@
 package com.chat.mapper;
 
+import com.chat.common.ParentsMapper;
 import com.chat.entity.SysRole;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+
+import java.util.List;
+
 
 /**
  * <p>
@@ -9,8 +12,13 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author taotao
- * @since 2018-05-17
+ * @since 2018-05-23
  */
-public interface SysRoleMapper extends BaseMapper<SysRole> {
+public interface SysRoleMapper extends ParentsMapper<SysRole> {
 
+    /**
+     * 通过uid查询角色表
+     * @return
+     */
+    public List<SysRole> selectByUid(long id);
 }

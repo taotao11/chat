@@ -1,7 +1,7 @@
 package com.chat.mapper;
 
 import com.chat.entity.SysRolePermission;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.chat.common.ParentsMapper;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * </p>
  *
  * @author taotao
- * @since 2018-05-17
+ * @since 2018-05-23
  */
-public interface SysRolePermissionMapper extends BaseMapper<SysRolePermission> {
+public interface SysRolePermissionMapper extends ParentsMapper<SysRolePermission> {
 
 }

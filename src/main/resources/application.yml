@@ -1,5 +1,6 @@
 server:
-  port: 8082
+  port: 8083
+  context-path: /web #加父路径
 #application-dev.properties配置文件中添加rabbitmq配置：
 
 spring:
